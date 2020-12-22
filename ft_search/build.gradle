@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding{
+        enabled = true
+    }
+
+}
+
+dependencies {
+
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.coreKtx
+
+    implementation rootProject.depsLibs.lifecycleExt
+    compileOnly rootProject.depsLibs.paging
+    implementation rootProject.depsLibs.lifecycleViewmodelKtx
+
+    compileOnly rootProject.depsLibs.constraintlayout
+
+    implementation rootProject.depsLibs.koinScop
+    implementation rootProject.depsLibs.KoinViewModel
+    implementation rootProject.depsLibs.koinFragmet
+
+    compileOnly rootProject.depsLibs.material
+
+    compileOnly rootProject.depsLibs.retrofit
+
+    compileOnly rootProject.depsLibs.aroutreApi
+    kapt rootProject.depsLibs.arouterCompiler
+    
+    compileOnly rootProject.depsLibs.SmartRefreshLayout
+
+
+    compileOnly project(":lib_base")
+    compileOnly project(":lib_net")
+
+
+}

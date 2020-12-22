@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+}
+
+dependencies {
+
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly rootProject.depsLibs.appcompat
+    compileOnly rootProject.depsLibs.coreKtx
+
+    implementation rootProject.depsLibs.lifecycleExt
+    compileOnly rootProject.depsLibs.paging
+    compileOnly rootProject.depsLibs.lifecycleViewmodelKtx
+
+    compileOnly rootProject.depsLibs.material
+    compileOnly rootProject.depsLibs.navigationFragment
+    compileOnly rootProject.depsLibs.navigationUi
+    compileOnly rootProject.depsLibs.navigationUiKtx
+    compileOnly rootProject.depsLibs.navigationFragmentKtx
+    compileOnly rootProject.depsLibs.constraintlayout
+
+    compileOnly rootProject.depsLibs.retrofit
+    compileOnly rootProject.depsLibs.SmartRefreshLayout
+    compileOnly rootProject.depsLibs.banner
+    compileOnly rootProject.depsLibs.glide
+    compileOnly rootProject.depsLibs.gson
+
+    implementation rootProject.depsLibs.koinScop
+    implementation rootProject.depsLibs.KoinViewModel
+    implementation rootProject.depsLibs.koinFragmet
+
+    compileOnly rootProject.depsLibs.viewPager2
+
+    compileOnly project(":lib_net")
+    compileOnly project(":lib_base")
+    compileOnly project(":lib_common_ui")
+    compileOnly project(":lib_image_loader")
+
+
+}
+
